@@ -576,7 +576,7 @@ child_surname, child_birth_date, parent_name, date_start, date_end)
 
 #############################################################################
 
-# Процесс добавления нового события
+# Добавление нового события
 # Запрос '/event_add'
 @bot.message_handler(commands=['event_add'])
 def event(message):
@@ -770,8 +770,8 @@ def save_event(message):
 
             CREATE TABLE IF NOT EXISTS event_schedule(
                 id SERIAL PRIMARY KEY
-                ,event_name VARCHAR(150) NOT NULL
-                ,event_place VARCHAR(150) NOT NULL
+                ,event_name VARCHAR(300) NOT NULL
+                ,event_place VARCHAR(300) NOT NULL
                 ,event_date_start DATE NOT NULL
                 ,event_date_end DATE NOT NULL
             );
@@ -862,7 +862,10 @@ def show_clients(message):
                 for child in children[:-1]:
                     parts = child.split(',')
                     child = ','.join(parts)
-                    bot.send_message(message.from_user.id, child,
+                    child = child.split(', ')
+                    text = f'Имя: {child[2]} \nФамилия: {child[3]}\
+\nДата рождения: {child[4]} \nПредставитель: {child[5]}'
+                    bot.send_message(message.from_user.id, text,
                                      reply_markup=types.ReplyKeyboardRemove())
         except Exception as e:
             bot.send_message(prog_id, f"Функция show_clients1: {e}")

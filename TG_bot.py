@@ -164,7 +164,7 @@ def registration_date_step(message):
             user.birth_date = answer
             # Переход к следующему этапу
             text = 'Введите Фамилию, Имя, Отчества представителя \
-Пример: Иванов Иван Иванович'
+\nПример: Иванов Иван Иванович'
             msg = bot.send_message(message.from_user.id, text,
                                    reply_markup=types.ReplyKeyboardRemove())
             bot.register_next_step_handler(msg, registration_parent_name)
