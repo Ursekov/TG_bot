@@ -1,6 +1,3 @@
-# 0 9 * * * /Users/artem_ursekov/Desktop/TG/tg_bot/bin/python /Users/artem_ursekov/Desktop/TG/TG_alarm_training.py
-
-
 import telebot
 from datetime import datetime
 import psycopg2

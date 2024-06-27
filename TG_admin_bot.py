@@ -912,18 +912,18 @@ bot.enable_save_next_step_handlers(delay=1)
 bot.load_next_step_handlers()
 
 # Запуск
-bot.polling(none_stop=True, interval=0)
+# bot.polling(none_stop=True, interval=0)
 
 # Бесконечный запуск
-# def start_bot():
-#     while True:
-#         try:
-#             bot.send_message(prog_id, f"Футбольный бот запущен")
-#             bot.polling(none_stop=True, interval=0)
-#         except Exception as e:
-#             bot.send_message(prog_id,
-#                              f"Ошибка в запуске футбольного бота: {e}")
-#             time.sleep(5)
+def start_bot():
+    while True:
+        try:
+            bot.send_message(prog_id, f"Футбольный бот запущен")
+            bot.polling(none_stop=True, interval=0)
+        except Exception as e:
+            bot.send_message(prog_id,
+                             f"Ошибка в запуске футбольного бота: {e}")
+            time.sleep(5)
 
-# if __name__ == '__main__':
-#     start_bot()
+if __name__ == '__main__':
+    start_bot()
