@@ -128,7 +128,7 @@ def children_list_request_by_name(child_name, child_surname):
         SELECT id, chat_id, child_name, child_surname, \
 child_birth_date, parent_name
         FROM football_clients
-        WHERE child_name = '{child_name}' AND child_surname = '{child_surname}'
+        WHERE child_name = '{child_name.replace(',', '，')}' AND child_surname = '{child_surname.replace(',', '，')}'
         """
 
         cursor.execute(select_table_query)

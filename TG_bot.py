@@ -272,10 +272,10 @@ def save_client(message):
                                                             ,child_birth_date
                                                             ,parent_name)
                 VALUES ({str(message.from_user.id)}
-                        ,'{user.name}'
-                        ,'{user.surname}'
+                        ,'{user.name.replace(',', '，')}'
+                        ,'{user.surname.replace(',', '，')}'
                         ,'{str(user.birth_date)}'
-                        ,'{user.representative}')"""
+                        ,'{user.representative.replace(',', '，')}')"""
                 # Выполнение запроса
                 cursor.execute(request)
                 # Фиксирование изменений
@@ -541,8 +541,8 @@ def help(message):
 @bot.message_handler(commands=['payment'])
 def payment_details(message):
     try:
-        bot.send_message(message.from_user.id, 'Для получения реквизитов \
-перейдите по этой ссылке google.com',
+        text = 'Реквизиты для оплаты появятся позже!'
+        bot.send_message(message.from_user.id, text,
                          reply_markup=types.ReplyKeyboardRemove())
     except Exception as e:
         bot.send_message(prog_id, f"Функция payment_details: {e}")
@@ -652,7 +652,7 @@ def start_bot():
         except Exception as e:
             bot.send_message(prog_id,
 f"Ошибка в запуске футбольного бота: {e}")
-            time.sleep(5)
+            time.sleep(1)
 
 if __name__ == '__main__':
     start_bot()

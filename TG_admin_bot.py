@@ -280,7 +280,7 @@ def save_training(message):
 
                 # Данные для вставки
                 data_to_insert = (training_schedule_class.time,
-                                  training_schedule_class.trainer,
+                                  training_schedule_class.trainer.replace(',', '，'),
                                   training_schedule_class.date)
 
                 # Выполнение вставки данных
@@ -790,12 +790,13 @@ event_date_start, event_date_end)
                     VALUES (%s, %s, %s, %s)
                 """
 
+
                 # Данные для вставки
-                data_to_insert = (event_schedule_class.name,
-                                  event_schedule_class.place,
+                data_to_insert = (event_schedule_class.name.replace(',', '，'),
+                                  event_schedule_class.place.replace(',', '，'),
                                   event_schedule_class.date_start,
                                   event_schedule_class.date_end)
-
+                print(data_to_insert)
                 # Выполнение вставки данных
                 cursor.execute(insert_query, data_to_insert)
 
@@ -926,7 +927,7 @@ def start_bot():
         except Exception as e:
             bot.send_message(prog_id,
                              f"Ошибка в запуске футбольного бота: {e}")
-            time.sleep(5)
+            time.sleep(1)
 
 if __name__ == '__main__':
     start_bot()
