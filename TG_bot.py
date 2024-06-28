@@ -555,7 +555,7 @@ def payment_details(message):
 def training_schedule(message):
     try:
         training_schedule = training_schedule_request()
-        if training_schedule == "Расписание в данный момент отсутствует":
+        if training_schedule == "Расписание в данный момент отсутствует.":
             bot.send_message(message.from_user.id, training_schedule,
                              reply_markup=types.ReplyKeyboardRemove())
         else:
