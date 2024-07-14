@@ -14,8 +14,8 @@ load_dotenv()
 
 # Данные для Telegram
 token = os.getenv('MAIN_BOT_TOKEN')
-# admin_id = os.getenv('ADMIN_ID')
-admin_id = os.getenv('PROG_ID')
+admin_id = os.getenv('ADMIN_ID')
+# admin_id = os.getenv('PROG_ID')
 prog_id = os.getenv('PROG_ID')
 bot = telebot.TeleBot(token)
 
@@ -81,7 +81,7 @@ def registration_start(message):
         answer = message.text.capitalize()
         answer_yes = ['Да', 'Хотим', 'Хочу']
         if answer in answer_yes:
-            text = 'Отлично! Как зовут ребенка?'
+            text = 'Отлично! Введите имя ребёнка'
             msg = bot.send_message(message.from_user.id, text,
                                    reply_markup=types.ReplyKeyboardRemove())
             bot.register_next_step_handler(msg, registration_name_step)
@@ -210,7 +210,8 @@ def process_finish(message):
         if answer == u'Да' or answer == u'Верно':
             save_client(message)
         elif answer == u'Нет':
-            text = "Хорошо, давайте тогда начнем сначала. Как зовут ребенка?"
+            text = """Хорошо, давайте тогда начнем сначала.
+Введите имя ребёнка"""
             msg = bot.send_message(message.from_user.id, text,
                                    reply_markup=types.ReplyKeyboardRemove())
             bot.register_next_step_handler(msg, registration_name_step)
@@ -537,11 +538,15 @@ def help(message):
     except Exception as e:
         bot.send_message(prog_id, f"Функция help: {e}")
 
+##############################################################################
 
 @bot.message_handler(commands=['payment'])
 def payment_details(message):
     try:
-        text = 'Реквизиты для оплаты появятся позже!'
+        text = 'Альфа Банк'
+        bot.send_message(message.from_user.id, text,
+                         reply_markup=types.ReplyKeyboardRemove())
+        text = '2200 1529 3223 3144'
         bot.send_message(message.from_user.id, text,
                          reply_markup=types.ReplyKeyboardRemove())
     except Exception as e:
